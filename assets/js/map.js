@@ -34,6 +34,9 @@ function addMarker(markerPos, map) {
         google.maps.event.addListener(marker, 'mousedown', function() {
             infowindow.setContent(results[1].formatted_address);
             infowindow.open(map, marker);
+             // Zoom to marker
+             map.panTo(this.getPosition());
+             map.setZoom(10);
           });
       } else {
         window.alert('No results found');
@@ -42,6 +45,14 @@ function addMarker(markerPos, map) {
       window.alert('Geocoder failed due to: ' + status);
     }
   });
+}
+
+//////////////////////////////
+// Set latitude and longitude
+//////////////////////////////
+function setlatlng(lat, lng){
+  $('#lat').val(lat);
+  $('#lng').val(lng);
 }
 
 ////////////////////////////
@@ -65,19 +76,38 @@ function locationReq() {
     });
   }
 }
+
+////////////////////////////////////////////////////
+// Get latitude and longitude of requested location
+////////////////////////////////////////////////////
+function getLatLng() {
+  var request = $('#search');
+  var geocoder =  new google.maps.Geocoder();
+  geocoder.geocode( { 'address': request.val()}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var lat = results[0].geometry.location.lat();
+      var lng = results[0].geometry.location.lng();
+      var newMarker = {lat: lat, lng: lng};
+        addMarker(newMarker, map);
+        setlatlng(lat, lng);
+        request.val('');
+    } else {
+      alert("Something went wrong " + status);
+      request.val('');
+    }
+  });
+}
+
 /////////////////////////////////////
 // Grab User input from search field
 /////////////////////////////////////
-$('.search-btn').on('click', function() {
-  var request = $('#search').val();
-  var geocoder =  new google.maps.Geocoder();
-  geocoder.geocode( { 'address': request}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var newMarker = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
-        addMarker(newMarker, map);
-    } else {
-      alert("Something went wrong " + status);
+$(document).keypress(function(e) {
+  var request = $('#search');
+    if(e.which == 13 && request.is(':focus')) {
+      getLatLng();
     }
-  });
+});
+$('.search-btn').on('click', function() {
+  getLatLng();
 });
 
