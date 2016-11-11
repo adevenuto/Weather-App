@@ -2,13 +2,41 @@ html, body {
   width: 100%;
   height: 100%;
 }
-h1 {
-  color: red;
+.input-group {
+  padding-bottom: 30px;
+}
+input[type='text'] {
+  width: 95%;
+}
+.col-sm-6 {
+  border: 1px solid #000;
+}
+/* Bootstrap Overide */
+.navbar-default {
+  background-color: #000;
+  border-color: #000;
+}
+/* Map */
+#exe-map {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 5px;
+  color: #fff;
+  background: #000;
+  border: 1px solid #fff;
+}
+#map-container {
+  position: relative;
 }
 #map {
-    height: 100%;
-    width: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
+  height: 500px;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  border-top: 3px solid #1e6aaa;
+  border-bottom: 3px solid #1e6aaa;
 }
