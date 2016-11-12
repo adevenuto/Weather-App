@@ -34,6 +34,8 @@ function addMarker(markerPos, map) {
         google.maps.event.addListener(marker, 'mousedown', function() {
             infowindow.setContent(results[1].formatted_address);
             infowindow.open(map, marker);
+             // Get local weather
+             weather(markerPos.lat,markerPos.lng);
              // Zoom to marker
              map.panTo(this.getPosition());
              map.setZoom(10);
@@ -67,9 +69,11 @@ function locationReq() {
     navigator.geolocation.getCurrentPosition(function(position) {
       point.push(position.coords.latitude);
       point.push(position.coords.longitude);
-      // populate lat/lng input fields
+      // Populate lat/lng input fields
       $('#lat').val(point[0]);
       $('#lng').val(point[1]);
+      // Get weather object for location
+      weather(point[0], point[1]);
       // Disable spinner
       $('.spinner').removeAttr('id');
       initMap(point[0],point[1]);
@@ -88,6 +92,7 @@ function getLatLng() {
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
       var newMarker = {lat: lat, lng: lng};
+        weather(lat,lng);
         addMarker(newMarker, map);
         setlatlng(lat, lng);
         request.val('');
@@ -97,6 +102,28 @@ function getLatLng() {
     }
   });
 }
+
+////////////////////////////
+// Get weather
+////////////////////////////
+function weather(lat, lng) {
+  $.ajax({                                 // HIDE THIS API KEY BEFORE LAUNCHING
+      url: "https://api.darksky.net/forecast/ea51c0e9ee90a905091f7b35ec31d2b9/" + lat + ',' + lng + "/", // src
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'jsonp',
+      success: function(data) {
+        $('#temp').html(data.currently.temperature);
+        $('#icon').html(data.currently.icon);
+        console.log(data);
+      },
+      error: function(err) {
+        alert(err);
+      }
+  });
+}
+
+
 
 /////////////////////////////////////
 // Grab User input from search field
@@ -108,6 +135,6 @@ $(document).keypress(function(e) {
     }
 });
 $('.search-btn').on('click', function() {
-  getLatLng();
+    getLatLng();
 });
 
