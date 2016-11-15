@@ -27,15 +27,16 @@ input[type='text'] {
   border: 1px solid #000;
 }
 #search-field {
-  padding: 30px 15px 15px 15px;
+  padding: 0 15px 15px 15px;
   /*border: 1px solid #000;*/
 }
 .display-top {
   height: 110px;
 }
 .display-bottom {
-  border: 1px solid #000;
-  height: 90px;
+  /*border: 1px solid #000;*/
+  height: 102px;
+  padding: 10px 0;
 }
 #currentWeatherIcon {
   height: 100px;
@@ -45,15 +46,15 @@ input[type='text'] {
   z-index: -1;
 }
 #weatherData {
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
   height: inherit;
   width: 55%;
   float: left;
-  padding: 5px;
+  padding: 0 5px;
   position: relative;
 }
 #currentWeather {
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
   height: inherit;
   width: 45%;
   float: left;
@@ -63,7 +64,10 @@ input[type='text'] {
 #temperature {
   font-size: 2em;
 }
-#summary {
+#time {
+  font-size: 2.2em;
+}
+#summary, #date {
   font-size: 1.2em;
 }
 .forecastIcon {
@@ -117,8 +121,84 @@ input[type='text'] {
   border-bottom: 3px solid #1e6aaa;
 }
 
-@media (max-width: 970px) {
+/*********************/
+/* CSS TOGGLE SWITCH */
+/*********************/
+/* The switch - the box around the slider */
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 45px;
+  height: 20px;
+  bottom: 13px;
+}
+.switch:after {
+  content: "F / C";
+  position: absolute;
+  font-size: .8em;
+  top: 20px;
+  left: 10px;
+}
+.switch1 {
+  position: absolute;
+  display: inline-block;
+  width: 45px;
+  height: 20px;
+  bottom: 13px;
+}
+.switch1:after {
+  content: "Traffic";
+  position: absolute;
+  font-size: .8em;
+  top: 20px;
+  left: 5px;
+}
+/* Hide default HTML checkbox */
+.switch input, .switch1 input {display:none;}
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+input:checked + .slider {
+  background-color: #000;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+@media (max-width: 900px) {
   #currentWeatherIcon {
-    height: 75px;
+    height: 60px;
   }
 }

@@ -26,17 +26,25 @@
     <div class="col-sm-7" id="weather-display">
       <div class="display-top">
         <div id="weatherData">
-          <div id="date"></div>
           <div id="time"></div>
+          <div id="date"></div>
           <div id="controls">
-            <button class="btn btn-default" id="c">C</button>
-            <button class="btn btn-default" id="f">F</button>
-            <button class="btn btn-default" id="traffic">Traffic</button>
+            <label class="switch1">
+              <input type="checkbox" id="trafficBtn">
+              <div class="slider round"></div>
+            </label>
           </div>
         </div>
         <div id="currentWeather">
           <div id="summary"></div>
           <div id="temperature" class="temp"></div>
+          <div id="weatherIcon"></div>
+
+          <label class="switch">
+            <input type="checkbox" id="unitsBtn">
+            <div class="slider round"></div>
+          </label>
+
         </div>
       </div>
       <div class="display-bottom" id="forecast"></div>

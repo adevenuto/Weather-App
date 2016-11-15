@@ -37,9 +37,9 @@ function retreiveCurrentTemp(data) {
     if (icons.hasOwnProperty(data.currently.icon)) {
         currentName = name;
         $('#summary').html("<strong>" +data.currently.summary + "</strong>");
-        $('#temperature').html(Math.round(data.currently.temperature)+"&#176");
+        $('#temperature').html(Math.round(data.currently.temperature)+"&#x2109");
         console.log(icons[name]);
-        $('#currentWeather').append("<img id='currentWeatherIcon' src='"+ icons[name] +"'>");
+        $('#weatherIcon').append("<img id='currentWeatherIcon' src='"+ icons[name] +"'>");
         return;
     }
   }
@@ -48,26 +48,19 @@ function retreiveCurrentTemp(data) {
 // F to C
 //////////
 var fahrenheit = false;
-$('#c').on('click', function(){
+$('#unitsBtn').on('click', function(){
   if(!fahrenheit) {
     $('.temp').each(function(i, obj) {
     var curTemp = $(this).html();
     var toCel = (parseInt(curTemp) - 32)/1.8;
-    $(this).html(Math.round(toCel.toString())+"&#x2109");
+    $(this).html(Math.round(toCel.toString())+"&#8451");
     fahrenheit = true;
     });
-  }
-});
-
-//////////
-// C to F
-//////////
-$('#f').on('click', function(){
-  if(fahrenheit) {
+  } else {
     $('.temp').each(function(i, obj) {
     var curTemp = $(this).html();
     var toFah = (parseInt(curTemp) * 1.8) + 32;
-    $(this).html(Math.round(toFah.toString())+"&#176;");
+    $(this).html(Math.round(toFah.toString())+"&#x2109;");
     fahrenheit = false;
     });
   }
@@ -88,16 +81,18 @@ function weather(lat, lng) {
         var timeZone = data.timezone;
         $('#date').html(moment.tz(time, timeZone).format("L"));
         $('#time').html(moment.tz(time, timeZone).format("LT"));
+        $("#weatherIcon").empty();
+        $("#unitsBtn").prop('checked', false);
+        $("#unitsBtn").prop('checked', false);
         retreiveCurrentTemp(data);
         $("#forecast").empty();
-        $("#currentWeatherIcon").empty();
         for(var i = 0;i<data.daily['data'].length;i++) {
           var thisIcon = icons[data.daily['data'][i].icon];
           console.log(thisIcon);
           $('#forecast').append("<div class='day'>" +
                                   "<p><strong>" + days[i] + "</strong></p>" +
-                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMax) + "&#176 </p>" +
-                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMin) + "&#176 </p>" +
+                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMax) + "&#x2109 </p>" +
+                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMin) + "&#x2109 </p>" +
                                   "<img class='forecastIcon' src='"+ thisIcon +"'>" +
                                 "</div>");
 
