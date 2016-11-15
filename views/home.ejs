@@ -1,7 +1,7 @@
 <% include partials/header %>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-5" id="search-field">
 
         <div class="input-group">
           <input type="text" class="form-control" id="search" placeholder="Enter Location...">
@@ -23,9 +23,24 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-7">
-      <h3 id="temp"></h3>
-      <h3 id="icon"></h3>
+    <div class="col-sm-7" id="weather-display">
+      <div class="display-top">
+        <div id="weatherData">
+
+        </div>
+        <div id="currentWeather">
+          <div id="summary"></div>
+          <div id="temperature" class="temp"></div>
+        </div>
+
+      </div>
+      <div class="display-bottom" id="forecast">
+
+      </div>
+
+        <!-- <button id="traffic">Traffic</button> -->
+        <button id="c">C</button>
+        <button id="f">F</button>
     </div>
   </div>
 </div> <!-- container-fluid -->
