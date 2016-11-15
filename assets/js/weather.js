@@ -83,6 +83,11 @@ function weather(lat, lng) {
       data: {}, // Additional parameters
       dataType: 'jsonp',
       success: function(data) {
+        fahrenheit = false;
+        var time = data.currently.time * 1000;
+        var timeZone = data.timezone;
+        $('#date').html(moment.tz(time, timeZone).format("L"));
+        $('#time').html(moment.tz(time, timeZone).format("LT"));
         retreiveCurrentTemp(data);
         $("#forecast").empty();
         $("#currentWeatherIcon").empty();

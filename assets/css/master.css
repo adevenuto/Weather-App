@@ -31,7 +31,6 @@ input[type='text'] {
   /*border: 1px solid #000;*/
 }
 .display-top {
-  border: 2px solid #000;
   height: 110px;
 }
 .display-bottom {
@@ -48,14 +47,17 @@ input[type='text'] {
 #weatherData {
   border: 1px solid #000;
   height: inherit;
-  width: 60%;
+  width: 55%;
   float: left;
+  padding: 5px;
+  position: relative;
 }
 #currentWeather {
   border: 1px solid #000;
   height: inherit;
-  width: 40%;
+  width: 45%;
   float: left;
+  padding: 5px;
   position: relative;
 }
 #temperature {
