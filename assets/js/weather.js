@@ -38,7 +38,6 @@ function retreiveCurrentTemp(data) {
         currentName = name;
         $('#summary').html("<strong>" +data.currently.summary + "</strong>");
         $('#temperature').html(Math.round(data.currently.temperature)+"&#x2109");
-        console.log(icons[name]);
         $('#weatherIcon').append("<img id='currentWeatherIcon' src='"+ icons[name] +"'>");
         return;
     }
@@ -88,23 +87,17 @@ function weather(lat, lng) {
         $("#forecast").empty();
         for(var i = 0;i<data.daily['data'].length;i++) {
           var thisIcon = icons[data.daily['data'][i].icon];
-          console.log(thisIcon);
-          $('#forecast').append("<div class='day'>" +
-                                  "<p><strong>" + days[i] + "</strong></p>" +
-                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMax) + "&#x2109 </p>" +
-                                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMin) + "&#x2109 </p>" +
-                                  "<img class='forecastIcon' src='"+ thisIcon +"'>" +
-                                "</div>");
-
+          $('#forecast')
+          .append("<div class='day'>" +
+                  "<p><strong>" + days[i] + "</strong></p>" +
+                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMax) + "&#x2109 </p>" +
+                  "<p class='temp'>" + Math.round(data.daily['data'][i].temperatureMin) + "&#x2109 </p>" +
+                  "<img class='forecastIcon' src='"+ thisIcon +"'>" +
+                  "</div>");
         }
-
-
-
-        console.log(data);
       },
       error: function(err) {
         alert(err);
       }
   });
 }
-
